@@ -10,11 +10,13 @@ import { registerUser, loginUser } from '@/lib/firebase';
 const Index = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
   const handleSubmit = (action) => async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       let user;
       if (action === 'Register') {
@@ -33,6 +35,8 @@ const Index = () => {
         description: error.message,
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -40,8 +44,8 @@ const Index = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>Affiliate Network Platform</CardTitle>
-          <CardDescription>Manage your affiliate programs efficiently</CardDescription>
+          <CardTitle>Affiliate Submit Tool</CardTitle>
+          <CardDescription>Streamline your affiliate program applications</CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="login" className="w-full">
@@ -66,7 +70,9 @@ const Index = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  <Button type="submit" className="w-full">Login</Button>
+                  <Button type="submit" className="w-full" disabled={isLoading}>
+                    {isLoading ? 'Logging in...' : 'Login'}
+                  </Button>
                 </div>
               </form>
             </TabsContent>
@@ -87,14 +93,16 @@ const Index = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  <Button type="submit" className="w-full">Register</Button>
+                  <Button type="submit" className="w-full" disabled={isLoading}>
+                    {isLoading ? 'Registering...' : 'Register'}
+                  </Button>
                 </div>
               </form>
             </TabsContent>
           </Tabs>
         </CardContent>
         <CardFooter>
-          <p className="text-sm text-gray-500">Secure login powered by Firebase</p>
+          <p className="text-sm text-gray-500">Secure authentication powered by Firebase</p>
         </CardFooter>
       </Card>
     </div>
