@@ -3,13 +3,13 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDkVX2bRWl0ekIzuwn1B-fGY3ZQoM3frLM",
-  authDomain: "affilliatesubmittool.firebaseapp.com",
-  projectId: "affilliatesubmittool",
-  storageBucket: "affilliatesubmittool.appspot.com",
-  messagingSenderId: "692266622477",
-  appId: "1:692266622477:web:701005881b234acaedbf44",
-  measurementId: "G-BBPYLPH6KX"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
